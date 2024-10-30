@@ -27,18 +27,14 @@ import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
 
-    // UI Elements
     TextView cityName, details;
     Button srcBtn;
-
-    // API Key and URL for weather information
     String apiKey = "956da2cfa0356405ec3445655bf0822b";
     String url;
 
-    // AdView for displaying banner ads
+
     private AdView adView;
 
-    // AsyncTask for fetching weather information
     class getWeather extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
@@ -89,20 +85,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Bind views
         cityName = findViewById(R.id.cityName);
         details = findViewById(R.id.details);
         srcBtn = findViewById(R.id.srcBtn);
         adView = findViewById(R.id.adView);
 
-        // Initialize Mobile Ads SDK
         MobileAds.initialize(this, initializationStatus -> {});
 
         // Load Banner Ad
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
 
-        // Button click event for fetching weather
         srcBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Apply system insets for better layout handling
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
